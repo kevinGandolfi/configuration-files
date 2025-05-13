@@ -1,0 +1,30 @@
+import = [
+    "~/.config/alacritty/themes/themes/alabaster.toml"
+]
+
+[shell]
+args = ['--login']
+program = "/usr/bin/bash"
+
+[cursor]
+style = "Block"
+
+[font]
+size = 20.0
+
+[font.normal]
+family = "Hack Nerd Font"
+
+[window]
+startup_mode = "Windowed"
+dynamic_padding = true
+opacity = 1.0
+
+[window.padding]
+x = 6
+y = 0
+
+[keyboard]
+bindings = [
+  { key = "Return", mods = "Control|Shift", action = "SpawnNewInstance"}, # `Ctrl+D` to close
+]
