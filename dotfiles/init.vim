@@ -52,7 +52,7 @@ set expandtab          " Convert tabs to spaces
 syntax on              " Enable syntax highlighting
 set number             " Show line numbers
 set relativenumber     " Show relative line numbers
-set clipboard=unnamed  " Link system clipboard to unnamed register
+set clipboard=unnamedplus  " Link system clipboard to unnamed register
 set ruler              " Show cursor position
 set cursorline         " Highlight current line
 set ignorecase         " Case-insensitive search...
@@ -65,6 +65,15 @@ set titlestring=%F     " Show full path of the file
 
 " ********** Mappings **********
 
+" Normal mode mappings
+
+nmap <silent> [W <Plug>(ale_first)
+nmap <silent> [w <Plug>(ale_previous)
+nmap <silent> ]W <Plug>(ale_last)
+nmap <silent> ]w <Plug>(ale_next)
+nmap gs <plug>(GrepperOperator)
+nnoremap <Leader>G :Grepper -tool rg<CR>
+nnoremap <Leader>g :Grepper -tool git<CR>
 "Clears the search highlights
 nnoremap <silent> <C-l> :<C-u>nohlsearch<CR><C-l>
 " Launches the FZF wrapper
@@ -72,15 +81,15 @@ nnoremap <C-p> :<C-u>FZF<CR>
 " Use the ALE Lint plugin
 nnoremap <Leader>l :<C-u>ALELint<CR>
 " Search for current word
-nnoremap <Leader>* :<C-u>Grepper -cword -noprompt<CR>
-" Search for the current selection
-nmap gs <plug>(GrepperOperator)
-xmap gs <plug>(GrepperOperator)
+nnoremap <Leader>f :<C-u>Grepper -cword -noprompt<CR>
 
-nmap <silent> [W <Plug>(ale_first)
-nmap <silent> [w <Plug>(ale_previous)
-nmap <silent> ]w <Plug>(ale_next)
-nmap <silent> ]W <Plug>(ale_last)
+" Terminal mode mappings
+
+tnoremap <Esc> <C-\><C-n>
+
+" Visual mode only mappings
+
+xmap gs <plug>(GrepperOperator)
 
 " ********** Commands **********
 
