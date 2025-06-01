@@ -57,11 +57,6 @@ symbol = ""
 style = "bg:#212736"
 format = '[[ $symbol ($version) ](fg:#769ff0 bg:#212736)]($style)'
 
-#[csharp]
-#symbol = ""
-#style = "bg:#212736"
-#format = '[[ $symbol ($version) ](fg:#769ff0 bg:#212736)]($style)'
-
 [time]
 disabled = false
 time_format = "%R" # Hour:Minute Format
