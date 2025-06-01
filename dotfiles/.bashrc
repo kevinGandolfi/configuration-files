@@ -129,6 +129,7 @@ export PATH=$PATH:~/code/good-day/node_modules/.bin
 
 eval "$(starship init bash)"
 shopt -s globstar
+set -o vi
 
 # Custom commands
 

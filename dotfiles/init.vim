@@ -9,8 +9,8 @@ let g:airline_powerline_fonts = 1
 let g:airline_theme = 'deus'
 let g:ale_lint_on_text_changed = 'always'
 let g:ale_linters = {
-\   'javascript': ['eslint'],
-\ }
+            \   'javascript': ['eslint'],
+            \ }
 let g:grepper = {}
 let g:grepper.tools = ['grep', 'git', 'rg']
 
@@ -19,17 +19,19 @@ let g:grepper.tools = ['grep', 'git', 'rg']
 set packpath^=~/.config/nvim
 packadd minpac
 call minpac#init()
+call minpac#add('bkad/CamelCaseMotion')
 call minpac#add('dense-analysis/ale')
 call minpac#add('junegunn/fzf')
 call minpac#add('junegunn/fzf.vim')
 call minpac#add('k-takata/minpac', {'type': 'opt'})
+call minpac#add('kana/vim-smartword')
 call minpac#add('kana/vim-textobj-entire')
 call minpac#add('kana/vim-textobj-user')
 call minpac#add('mhinz/vim-grepper')
 call minpac#add('radenling/vim-dispatch-neovim')
 call minpac#add('tpope/vim-commentary')
-call minpac#add('tpope/vim-fugitive')
 call minpac#add('tpope/vim-dispatch')
+call minpac#add('tpope/vim-fugitive')
 call minpac#add('tpope/vim-projectionist')
 call minpac#add('tpope/vim-scriptease', {'type': 'opt'})
 call minpac#add('tpope/vim-surround')
@@ -65,6 +67,18 @@ set titlestring=%F     " Show full path of the file
 
 " ********** Mappings **********
 
+" Multi mode mappings
+
+map j gj
+map k gk
+map w  <Plug>(smartword-w)
+map b  <Plug>(smartword-b)
+map e  <Plug>(smartword-e)
+map ge  <Plug>(smartword-ge)
+map <Plug>(smartword-basic-w)  <Plug>CamelCaseMotion_w
+map <Plug>(smartword-basic-b)  <Plug>CamelCaseMotion_b
+map <Plug>(smartword-basic-e)  <Plug>CamelCaseMotion_e
+
 " Normal mode mappings
 
 nmap <silent> [W <Plug>(ale_first)
@@ -76,16 +90,17 @@ nnoremap <Leader>G :Grepper -tool rg<CR>
 nnoremap <Leader>g :Grepper -tool git<CR>
 "Clears the search highlights
 nnoremap <silent> <C-l> :<C-u>nohlsearch<CR><C-l>
-" Launches the FZF wrapper
 nnoremap <C-p> :<C-u>FZF<CR>
-" Use the ALE Lint plugin
 nnoremap <Leader>l :<C-u>ALELint<CR>
 " Search for current word
 nnoremap <Leader>f :<C-u>Grepper -cword -noprompt<CR>
 
 " Terminal mode mappings
 
-tnoremap <Esc> <C-\><C-n>
+if has('nvim')
+    tnoremap <Esc> <C-\><C-n>
+    tnoremap <C-v><Esc> <Esc>
+endif
 
 " Visual mode only mappings
 
@@ -99,8 +114,8 @@ command! PackClean call minpac#clean()
 " ********** Functions **********
 
 function! SetupCommandAlias(input, output)
-  exec 'cabbrev <expr> '.a:input
-        \ .' ((getcmdtype() is# ":" && getcmdline() is# "'.a:input.'")'
-        \ .'? ("'.a:output.'") : ("'.a:input.'"))'
+    exec 'cabbrev <expr> '.a:input
+                \ .' ((getcmdtype() is# ":" && getcmdline() is# "'.a:input.'")'
+                \ .'? ("'.a:output.'") : ("'.a:input.'"))'
 endfunction
 call SetupCommandAlias("grep", "GrepperGrep")
