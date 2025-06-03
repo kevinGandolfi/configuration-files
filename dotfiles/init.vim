@@ -33,6 +33,7 @@ call minpac#add('radenling/vim-dispatch-neovim')
 call minpac#add('tpope/vim-commentary')
 call minpac#add('tpope/vim-dispatch')
 call minpac#add('tpope/vim-fugitive')
+call minpac#add('tpope/vim-obsession')
 call minpac#add('tpope/vim-projectionist')
 call minpac#add('tpope/vim-scriptease', {'type': 'opt'})
 call minpac#add('tpope/vim-surround')
@@ -65,6 +66,7 @@ set hlsearch              " Highlight all matches
 set wildmenu              " Enhanced command-line completion
 set title                 " Show filename in window title
 set titlestring=%F        " Show full path of the file
+set undofile              " Enables undo history recording
 
 " ********** Mappings **********
 
