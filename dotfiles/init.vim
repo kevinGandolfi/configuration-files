@@ -75,13 +75,6 @@ set undodir=$VIMDATA/undo " Sets the directory where the undo history will be sa
 
 map j gj
 map k gk
-map w  <Plug>(smartword-w)
-map b  <Plug>(smartword-b)
-map e  <Plug>(smartword-e)
-map ge  <Plug>(smartword-ge)
-map <Plug>(smartword-basic-w)  <Plug>CamelCaseMotion_w
-map <Plug>(smartword-basic-b)  <Plug>CamelCaseMotion_b
-map <Plug>(smartword-basic-e)  <Plug>CamelCaseMotion_e
 
 " Normal mode mappings
 
@@ -124,6 +117,21 @@ xnoremap <M-j> <C-w>j
 xnoremap <M-k> <C-w>k
 xnoremap <M-l> <C-w>l
 xnoremap <M-w> <C-w>w
+
+augroup CamelCaseInit
+    autocmd!
+    autocmd VimEnter * call s:SetupCamelCaseMappings()
+augroup END
+
+function! s:SetupCamelCaseMappings()
+    map w  <Plug>(smartword-w)
+    map b  <Plug>(smartword-b)
+    map e  <Plug>(smartword-e)
+    map ge <Plug>(smartword-ge)
+    map <Plug>(smartword-basic-w)  <Plug>CamelCaseMotion_w
+    map <Plug>(smartword-basic-b)  <Plug>CamelCaseMotion_b
+    map <Plug>(smartword-basic-e)  <Plug>CamelCaseMotion_e
+endfunction
 
 " ********** Commands **********
 
