@@ -67,6 +67,7 @@ set wildmenu              " Enhanced command-line completion
 set title                 " Show filename in window title
 set titlestring=%F        " Show full path of the file
 set undofile              " Enables undo history recording
+set undodir=$VIMDATA/undo " Sets the directory where the undo history will be saved
 
 " ********** Mappings **********
 
