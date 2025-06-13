@@ -21,6 +21,7 @@ packadd minpac
 call minpac#init()
 call minpac#add('bkad/CamelCaseMotion')
 call minpac#add('dense-analysis/ale')
+call minpac#add('editorconfig/editorconfig-vim')
 call minpac#add('junegunn/fzf')
 call minpac#add('junegunn/fzf.vim')
 call minpac#add('k-takata/minpac', {'type': 'opt'})
