@@ -16,8 +16,8 @@ let g:grepper.tools = ['grep', 'git', 'rg']
 
 " ********** Plugins **********
 
-set packpath^=~/.config/nvim
 packadd minpac
+set packpath^=~/.config/nvim
 call minpac#init()
 call minpac#add('bkad/CamelCaseMotion')
 call minpac#add('dense-analysis/ale')
