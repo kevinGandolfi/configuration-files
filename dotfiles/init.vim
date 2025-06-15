@@ -21,6 +21,7 @@ set packpath^=~/.config/nvim
 call minpac#init()
 call minpac#add('bkad/CamelCaseMotion')
 call minpac#add('dense-analysis/ale')
+call minpac#add('editorconfig/editorconfig-vim')
 call minpac#add('junegunn/fzf')
 call minpac#add('junegunn/fzf.vim')
 call minpac#add('k-takata/minpac', {'type': 'opt'})
@@ -67,6 +68,7 @@ set wildmenu              " Enhanced command-line completion
 set title                 " Show filename in window title
 set titlestring=%F        " Show full path of the file
 set undofile              " Enables undo history recording
+set undodir=$VIMDATA/undo " Sets the directory where the undo history will be saved
 
 " ********** Mappings **********
 
@@ -74,13 +76,6 @@ set undofile              " Enables undo history recording
 
 map j gj
 map k gk
-map w  <Plug>(smartword-w)
-map b  <Plug>(smartword-b)
-map e  <Plug>(smartword-e)
-map ge  <Plug>(smartword-ge)
-map <Plug>(smartword-basic-w)  <Plug>CamelCaseMotion_w
-map <Plug>(smartword-basic-b)  <Plug>CamelCaseMotion_b
-map <Plug>(smartword-basic-e)  <Plug>CamelCaseMotion_e
 
 " Normal mode mappings
 
@@ -123,6 +118,21 @@ xnoremap <M-j> <C-w>j
 xnoremap <M-k> <C-w>k
 xnoremap <M-l> <C-w>l
 xnoremap <M-w> <C-w>w
+
+augroup CamelCaseInit
+    autocmd!
+    autocmd VimEnter * call s:SetupCamelCaseMappings()
+augroup END
+
+function! s:SetupCamelCaseMappings()
+    map w  <Plug>(smartword-w)
+    map b  <Plug>(smartword-b)
+    map e  <Plug>(smartword-e)
+    map ge <Plug>(smartword-ge)
+    map <Plug>(smartword-basic-w)  <Plug>CamelCaseMotion_w
+    map <Plug>(smartword-basic-b)  <Plug>CamelCaseMotion_b
+    map <Plug>(smartword-basic-e)  <Plug>CamelCaseMotion_e
+endfunction
 
 " ********** Commands **********
 
