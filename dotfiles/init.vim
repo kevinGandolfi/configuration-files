@@ -17,6 +17,7 @@ let g:grepper.tools = ['grep', 'git', 'rg']
 " ********** Plugins **********
 
 packadd minpac
+packadd nvim-treesitter
 set packpath^=~/.config/nvim
 call minpac#init()
 call minpac#add('bkad/CamelCaseMotion')
@@ -28,7 +29,10 @@ call minpac#add('k-takata/minpac', {'type': 'opt'})
 call minpac#add('kana/vim-smartword')
 call minpac#add('kana/vim-textobj-entire')
 call minpac#add('kana/vim-textobj-user')
+call minpac#add('mfussenegger/nvim-jdtls')
 call minpac#add('mhinz/vim-grepper')
+call minpac#add('neovim/nvim-lspconfig')
+call minpac#add('nvim-treesitter/nvim-treesitter', {'type': 'opt'})
 call minpac#add('psliwka/vim-smoothie')
 call minpac#add('radenling/vim-dispatch-neovim')
 call minpac#add('tpope/vim-commentary')
@@ -147,3 +151,15 @@ function! SetupCommandAlias(input, output)
                 \ .'? ("'.a:output.'") : ("'.a:input.'"))'
 endfunction
 call SetupCommandAlias("grep", "GrepperGrep")
+
+lua << EOF
+require'nvim-treesitter.configs'.setup {
+    ensure_installed = {"java", "lua", "json"},
+    highlight = {
+        enable = true
+    },
+    indent = {
+        enable = true
+    }
+}
+EOF
