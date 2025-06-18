@@ -17,7 +17,6 @@ let g:grepper.tools = ['grep', 'git', 'rg']
 " ********** Plugins **********
 
 packadd minpac
-packadd nvim-treesitter
 set packpath^=~/.config/nvim
 call minpac#init()
 call minpac#add('bkad/CamelCaseMotion')
@@ -32,9 +31,10 @@ call minpac#add('kana/vim-textobj-user')
 call minpac#add('mfussenegger/nvim-jdtls')
 call minpac#add('mhinz/vim-grepper')
 call minpac#add('neovim/nvim-lspconfig')
-call minpac#add('nvim-treesitter/nvim-treesitter', {'type': 'opt'})
+call minpac#add('nvim-treesitter/nvim-treesitter')
 call minpac#add('psliwka/vim-smoothie')
 call minpac#add('radenling/vim-dispatch-neovim')
+call minpac#add('rose-pine/neovim')
 call minpac#add('tpope/vim-commentary')
 call minpac#add('tpope/vim-dispatch')
 call minpac#add('tpope/vim-fugitive')
@@ -163,3 +163,6 @@ require'nvim-treesitter.configs'.setup {
     }
 }
 EOF
+
+set background=light
+colorscheme rose-pine
