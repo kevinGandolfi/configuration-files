@@ -45,6 +45,8 @@ call minpac#add('tpope/vim-surround')
 call minpac#add('tpope/vim-unimpaired')
 call minpac#add('vim-airline/vim-airline')
 call minpac#add('vim-airline/vim-airline-themes')
+call minpac#add('williamboman/mason.nvim')
+call minpac#add('williamboman/mason-lspconfig.nvim')
 
 " ********** Indentation **********
 
@@ -123,25 +125,15 @@ xnoremap <M-k> <C-w>k
 xnoremap <M-l> <C-w>l
 xnoremap <M-w> <C-w>w
 
-augroup CamelCaseInit
-    autocmd!
-    autocmd VimEnter * call s:SetupCamelCaseMappings()
-augroup END
-
-function! s:SetupCamelCaseMappings()
-    map w  <Plug>(smartword-w)
-    map b  <Plug>(smartword-b)
-    map e  <Plug>(smartword-e)
-    map ge <Plug>(smartword-ge)
-    map <Plug>(smartword-basic-w)  <Plug>CamelCaseMotion_w
-    map <Plug>(smartword-basic-b)  <Plug>CamelCaseMotion_b
-    map <Plug>(smartword-basic-e)  <Plug>CamelCaseMotion_e
-endfunction
-
 " ********** Commands **********
 
 command! PackUpdate call minpac#update()
 command! PackClean call minpac#clean()
+
+augroup jdtls_lsp
+  autocmd!
+  autocmd FileType java source ~/.config/nvim/jdtls.vim
+augroup END
 
 " ********** Functions **********
 
@@ -162,6 +154,8 @@ require'nvim-treesitter.configs'.setup {
         enable = true
     }
 }
+require("mason").setup()
+require("mason-lspconfig").setup()
 EOF
 
 set background=light
