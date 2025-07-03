@@ -1,18 +1,29 @@
 vim.keymap.set("n", "j", "gj")
 vim.keymap.set("n", "k", "gk")
+
+-- Grepper
 vim.keymap.set("n", "<Leader>G", ":Grepper -tool rg<CR>", { noremap = true, silent = true })
 vim.keymap.set("n", "<Leader>g", ":Grepper -tool git<CR>", { noremap = true, silent = true })
 vim.keymap.set("n", "<Leader>f", ":Grepper -cword -noprompt<CR>", { noremap = true, silent = true })
-vim.keymap.set("n", "<Leader>l", ":ALELint<CR>", { noremap = true, silent = true })
 
+-- Ale
+vim.keymap.set("n", "<Leader>l", ":ALELint<CR>", { noremap = true, silent = true })
+vim.keymap.set('n', '[W', '<Plug>(ale_first)', { silent = true })
+vim.keymap.set('n', '[w', '<Plug>(ale_previous)', { silent = true })
+vim.keymap.set('n', ']W', '<Plug>(ale_last)', { silent = true })
+vim.keymap.set('n', ']w', '<Plug>(ale_next)', { silent = true })
 vim.keymap.set("n", "<C-l>", "<Cmd>nohlsearch<CR><C-l>", { noremap = true, silent = true })
+
+-- FZF
 vim.keymap.set("n", "<C-p>", ":FZF<CR>", { noremap = true })
 
+-- Smartword
 vim.keymap.set("n", "w", "<Plug>(smartword-w)")
 vim.keymap.set("n", "b", "<Plug>(smartword-b)")
 vim.keymap.set("n", "e", "<Plug>(smartword-e)")
 vim.keymap.set("n", "ge", "<Plug>(smartword-ge)")
 
+-- VimSmoothie
 vim.keymap.set("n", "<Up>", "<Plug>(SmoothieUpwards)")
 vim.keymap.set("n", "<Down>", "<Plug>(SmoothieDownwards)")
 

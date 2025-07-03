@@ -43,8 +43,16 @@ require("lazy").setup({
 
 require("nvim-treesitter.configs").setup {
     ensure_installed = { "java", "lua", "json" },
-    highlight = { enable = true },
-    indent = { enable = true }
+    highlight = { 
+        enable = true,
+        disable = { "vimdoc" },
+    },
+    indent = { 
+        enable = true, 
+        disable = { "vimdoc" },
+    },
+    auto_install = true,
+    ignore_install = { "vimdoc" },
 }
 
 require("mason").setup()
