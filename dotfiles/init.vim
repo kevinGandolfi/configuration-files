@@ -19,7 +19,6 @@ let g:grepper.tools = ['grep', 'git', 'rg']
 packadd minpac
 set packpath^=~/.config/nvim
 call minpac#init()
-call minpac#add('bkad/CamelCaseMotion')
 call minpac#add('dense-analysis/ale')
 call minpac#add('editorconfig/editorconfig-vim')
 call minpac#add('junegunn/fzf')
@@ -90,6 +89,10 @@ nmap <silent> [w <Plug>(ale_previous)
 nmap <silent> ]W <Plug>(ale_last)
 nmap <silent> ]w <Plug>(ale_next)
 nmap gs <plug>(GrepperOperator)
+nmap w <Plug>(smartword-w)
+nmap b <Plug>(smartword-b)
+nmap e <Plug>(smartword-e)
+nmap ge <Plug>(smartword-ge)
 nnoremap <Leader>G :Grepper -tool rg<CR>
 nnoremap <Leader>g :Grepper -tool git<CR>
 nnoremap <M-h> <c-w>h
@@ -103,6 +106,8 @@ nnoremap <C-p> :<C-u>FZF<CR>
 nnoremap <Leader>l :<C-u>ALELint<CR>
 " Search for current word
 nnoremap <Leader>f :<C-u>Grepper -cword -noprompt<CR>
+nnoremap <Up> <Plug>(SmoothieUpwards)
+nnoremap <Down> <Plug>(SmoothieDownwards)
 
 " Terminal mode mappings
 
@@ -132,7 +137,7 @@ command! PackClean call minpac#clean()
 
 augroup jdtls_lsp
   autocmd!
-  autocmd FileType java source ~/.config/nvim/jdtls.vim
+  autocmd FileType java lua require('java_lsp')
 augroup END
 
 " ********** Functions **********
@@ -156,6 +161,7 @@ require'nvim-treesitter.configs'.setup {
 }
 require("mason").setup()
 require("mason-lspconfig").setup()
+vim.keymap.set('n', '<Leader>r', vim.lsp.buf.rename, { noremap = true, silent = true })
 EOF
 
 set background=light
