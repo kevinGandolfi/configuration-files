@@ -10,9 +10,21 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
-    -- Plugin list
     { "dense-analysis/ale" },
     { "editorconfig/editorconfig-vim" },
+    -- Completion engine
+    {
+        "hrsh7th/nvim-cmp",
+        dependencies = {
+            "hrsh7th/cmp-nvim-lsp",
+            "hrsh7th/cmp-buffer",
+            "hrsh7th/cmp-path",
+            "hrsh7th/cmp-cmdline",
+            "L3MON4D3/LuaSnip",
+            "saadparwaiz1/cmp_luasnip",
+        },
+    },
+
     { "junegunn/fzf", build = "./install --bin" },
     { "junegunn/fzf.vim" },
     { "kana/vim-smartword" },
@@ -60,6 +72,7 @@ require("mason-lspconfig").setup()
 require("config.lsp")
 require("config.options")
 require("config.keymaps")
+require("config.cmp")
 
 -- Java specific LSP
 vim.api.nvim_create_autocmd("FileType", {
