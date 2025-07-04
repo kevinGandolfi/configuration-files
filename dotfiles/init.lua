@@ -24,12 +24,11 @@ require("lazy").setup({
             "saadparwaiz1/cmp_luasnip",
         },
     },
-
     { "junegunn/fzf", build = "./install --bin" },
     { "junegunn/fzf.vim" },
     { "kana/vim-smartword" },
-    { 
-        "kana/vim-textobj-entire", 
+    {
+        "kana/vim-textobj-entire",
         dependencies = { "kana/vim-textobj-user" }
     },
     { "mfussenegger/nvim-jdtls" },
@@ -55,12 +54,12 @@ require("lazy").setup({
 
 require("nvim-treesitter.configs").setup {
     ensure_installed = { "java", "lua", "json" },
-    highlight = { 
+    highlight = {
         enable = true,
         disable = { "vimdoc" },
     },
-    indent = { 
-        enable = true, 
+    indent = {
+        enable = true,
         disable = { "vimdoc" },
     },
     auto_install = true,

@@ -23,14 +23,10 @@ function M.setup()
         ['*'] = { 'remove_trailing_lines', 'trim_whitespace' }
     }
 
-    -- Configuration Java avec Checkstyle compatible Google Java Format
     vim.g.ale_java_javac_classpath = '.'
     vim.g.ale_java_javac_options = '-Xlint:all -encoding UTF-8'
-    vim.g.ale_java_checkstyle_options = '-c /google_checks.xml'
+    vim.g.ale_java_checkstyle_options = '-c ~/.config/google_checks.xml -x "Indentation"'
     vim.g.ale_java_google_java_format_options = '--aosp'
-
-    -- Option : désactiver les règles d'indentation de Checkstyle
-    -- vim.g.ale_java_checkstyle_options = '-c /path/to/custom_checks.xml'
 
     -- Apparence
     vim.g.ale_echo_msg_format = '[%linter%] %s [%severity%]'
@@ -101,37 +97,6 @@ function M.setup_java_project()
     end
 end
 
--- Fonction pour vérifier les outils Java installés (corrigée)
-function M.check_java_tools()
-    local tools = {
-        { name = 'java', cmd = 'java -version' },
-        { name = 'checkstyle', cmd = 'checkstyle --version' },
-        { name = 'google-java-format', cmd = 'google-java-format --version' },
-        { name = 'pmd', cmd = 'pmd --version' }
-    }
-
-    print("Vérification des outils Java pour ALE...")
-    for _, tool in ipairs(tools) do
-        -- Utiliser vim.fn.system() au lieu de io.popen() pour une meilleure compatibilité
-        local result = vim.fn.system(tool.cmd .. ' 2>&1')
-        local exit_code = vim.v.shell_error
-
-        if exit_code == 0 or (tool.name == 'java' and result:match('version')) then
-            print("✓ " .. tool.name .. " : installé")
-            if tool.name == 'google-java-format' then
-                print("  " .. result:gsub('\n', ' '))
-            end
-        else
-            print("✗ " .. tool.name .. " : non installé ou non accessible")
-            if tool.name == 'google-java-format' then
-                print("  Astuce: Vérifiez que google-java-format est dans le PATH")
-            end
-        end
-    end
-
-    print("\nPour installer les outils manquants, exécutez le script d'installation fourni.")
-end
-
 -- Détection automatique des chemins Ubuntu (améliorée)
 function M.detect_ubuntu_paths()
     local ubuntu_java_paths = {
@@ -167,46 +132,4 @@ function M.detect_ubuntu_paths()
         end
     end
 end
-
--- Fonction de diagnostic pour ALE
-function M.diagnostic()
-    print("=== Diagnostic ALE ===")
-
-    -- Vérifier les outils
-    M.check_java_tools()
-
-    -- Vérifier le PATH
-    print("\nPATH actuel:")
-    print(vim.env.PATH)
-
-    -- Vérifier les fixers configurés
-    print("\nFixers configurés pour Java:")
-    local java_fixers = vim.g.ale_fixers and vim.g.ale_fixers.java or {}
-    for _, fixer in ipairs(java_fixers) do
-        print("- " .. fixer)
-    end
-
-    -- Vérifier les fixers du buffer courant
-    local buf_fixers = vim.b.ale_fixers or {}
-    if #buf_fixers > 0 then
-        print("\nFixers du buffer courant:")
-        for _, fixer in ipairs(buf_fixers) do
-            print("- " .. fixer)
-        end
-    end
-
-    -- Vérifier si ALE peut voir google-java-format
-    print("\nTest de google-java-format:")
-    local result = vim.fn.system('which google-java-format 2>/dev/null')
-    if vim.v.shell_error == 0 then
-        print("✓ google-java-format trouvé dans: " .. result:gsub('\n', ''))
-    else
-        print("✗ google-java-format non trouvé dans le PATH")
-    end
-
-    -- Informations ALE
-    print("\n=== Informations ALE ===")
-    print("Version ALE installée, utilisez :ALEInfo pour plus de détails")
-end
-
 return M
