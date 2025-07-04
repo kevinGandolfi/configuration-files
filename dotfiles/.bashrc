@@ -138,3 +138,5 @@ cdf() {
     dir=$(find . -type d | fzf) && cd "$dir"
 }
 
+export JAVA_HOME="/usr/lib/jvm/default-java"
+export PATH="$JAVA_HOME/bin:$PATH"

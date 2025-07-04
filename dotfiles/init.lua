@@ -73,6 +73,7 @@ require("config.lsp")
 require("config.options")
 require("config.keymaps")
 require("config.cmp")
+require('config.ale').setup()
 
 -- Java specific LSP
 vim.api.nvim_create_autocmd("FileType", {
