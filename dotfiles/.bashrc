@@ -140,3 +140,7 @@ cdf() {
 
 export JAVA_HOME="/usr/lib/jvm/default-java"
 export PATH="$JAVA_HOME/bin:$PATH"
+
+#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
+export SDKMAN_DIR="$HOME/.sdkman"
+[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
