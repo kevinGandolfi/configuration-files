@@ -19,7 +19,7 @@ vim.opt.wildmenu = true
 vim.opt.title = true
 vim.opt.titlestring = "%F"
 vim.opt.undofile = true
-vim.opt.undodir = vim.fn.expand("$VIMDATA/undo")
+vim.opt.undodir = vim.fn.stdpath("data") .. "/undo"
 
 vim.cmd("syntax on")
 vim.opt.background = "light"
