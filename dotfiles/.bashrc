@@ -115,7 +115,7 @@ if ! shopt -oq posix; then
     . /etc/bash_completion
   fi
 fi
-. "$HOME/.cargo/env"
+# . "$HOME/.cargo/env"
 
 # Variables
 
@@ -123,7 +123,6 @@ export PATH="$HOME/.local/bin:$PATH"
 export VIMCONFIG=~/.config/nvim
 export VIMDATA=~/.local/share/nvim
 export FZF_DEFAULT_COMMAND='rg --files --hidden'
-export PATH=$PATH:~/code/good-day/node_modules/.bin
 
 # Miscellaneous
 
