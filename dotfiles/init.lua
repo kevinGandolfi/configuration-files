@@ -105,9 +105,10 @@ require("mason-lspconfig").setup({
 
 require("config.dap")
 require("config.lsp")
+require("config.jdtls")
 require("config.options")
-require("config.keymaps")
 require("config.cmp")
 require("config.ale").setup()
+require("config.keymaps")
 
 vim.cmd.colorscheme("rose-pine")

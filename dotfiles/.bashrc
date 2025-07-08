@@ -137,7 +137,7 @@ cdf() {
     dir=$(find . -type d | fzf) && cd "$dir"
 }
 
-export JAVA_HOME="/usr/lib/jvm/default-java"
+export JAVA_HOME=/usr/lib/jvm/java-21-openjdk-amd64
 export PATH="$JAVA_HOME/bin:$PATH"
 
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
