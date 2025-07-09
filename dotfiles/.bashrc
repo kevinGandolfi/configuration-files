@@ -140,6 +140,6 @@ cdf() {
 export JAVA_HOME=/usr/lib/jvm/java-21-openjdk-amd64
 export PATH="$JAVA_HOME/bin:$PATH"
 
-#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
-export SDKMAN_DIR="$HOME/.sdkman"
-[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
+alias checkstyle='java -jar ~/checkstyle.jar'
+alias gjf='java -jar ~/google-java-format.jar'
+alias pmd="$HOME/pmd-bin-7.15.0/bin/pmd"

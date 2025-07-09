@@ -30,34 +30,28 @@ require("lazy").setup({
 		"kana/vim-textobj-entire",
 		dependencies = { "kana/vim-textobj-user" }
 	},
-	{ "mhinz/vim-grepper" },
 	{
-		"mfussenegger/nvim-jdtls",
-		ft = "java",
-		dependencies = {
-			"mfussenegger/nvim-dap",
-			"rcarriga/nvim-dap-ui",
-			"theHamsta/nvim-dap-virtual-text",
-		},
-	},
-	{
+		-- DAP
 		"mfussenegger/nvim-dap",
-		dependencies = {
+		-- DAP UI
+		{
 			"rcarriga/nvim-dap-ui",
+			lazy = true,
+			dependencies = { "mfussenegger/nvim-dap", "nvim-neotest/nvim-nio" },
+			config = function()
+				require("dapui").setup()
+			end,
+		},
+		-- DAP Virtual Text
+		{
 			"theHamsta/nvim-dap-virtual-text",
+			dependencies = { "mfussenegger/nvim-dap", "nvim-treesitter/nvim-treesitter" },
+			config = function()
+				require("nvim-dap-virtual-text").setup()
+			end,
 		},
 	},
-	{
-		"rcarriga/nvim-dap-ui",
-		dependencies = {
-			"mfussenegger/nvim-dap",
-			"nvim-neotest/nvim-nio"
-		},
-	},
-	{
-		"theHamsta/nvim-dap-virtual-text",
-		dependencies = { "mfussenegger/nvim-dap" },
-	},
+	{ "mhinz/vim-grepper" },
 	{ "neovim/nvim-lspconfig" },
 	{ "nvim-treesitter/nvim-treesitter", build = ":TSUpdate" },
 	{ "psliwka/vim-smoothie" },
@@ -73,15 +67,17 @@ require("lazy").setup({
 	{ "tpope/vim-unimpaired" },
 	{ "vim-airline/vim-airline" },
 	{ "vim-airline/vim-airline-themes" },
-	{ "williamboman/mason.nvim", opts = {} },
-	{ "williamboman/mason-lspconfig.nvim", opts = {} },
-})
-
-vim.api.nvim_create_autocmd("FileType", {
-	pattern = "java",
-	callback = function()
-		require("lsp.java")
-	end,
+	{
+		{
+			"williamboman/mason-lspconfig.nvim",
+			dependencies = { "williamboman/mason.nvim", "neovim/nvim-lspconfig" },
+		},
+		-- Setups up neovim for
+		-- 1. lsp (with the help of lspconfig)
+		-- 2. Dap configurations, etc.
+		-- LSP Configuration
+		{ "nvim-java/nvim-java" },
+	}
 })
 
 require("nvim-treesitter.configs").setup {
@@ -97,15 +93,12 @@ require("nvim-treesitter.configs").setup {
 	auto_install = true,
 	ignore_install = { "vimdoc" },
 }
-
 require("mason").setup()
 require("mason-lspconfig").setup({
 	automatic_installation = false,
 })
-
-require("config.dap")
 require("config.lsp")
-require("config.jdtls")
+require("config.dap")
 require("config.options")
 require("config.cmp")
 require("config.ale").setup()
