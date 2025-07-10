@@ -70,6 +70,7 @@ require("mason-lspconfig").setup()
 require("config.lsp")
 require("config.options")
 require("config.keymaps")
+require("config.ale").setup()
 require("config.cmp")
 
 -- Java specific LSP
