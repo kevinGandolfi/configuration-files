@@ -2,7 +2,6 @@ local M = {}
 
 function M.setup()
     M.detect_ubuntu_paths()
-
     -- Configuration globale ALE
     vim.g.ale_completion_enabled = 0
     vim.g.ale_lint_on_text_changed = 'always'
@@ -80,7 +79,6 @@ end
 
 function M.setup_java_project()
     local cwd = vim.fn.getcwd()
-
     if vim.fn.filereadable(cwd .. '/pom.xml') == 1 then
         vim.g.ale_java_javac_classpath = table.concat({
             cwd .. '/target/classes',
@@ -134,6 +132,27 @@ function M.detect_ubuntu_paths()
             if not current_path:find(path, 1, true) then
                 vim.env.PATH = path .. ':' .. current_path
             end
+        end
+    end
+end
+
+function M.check_java_tools()
+    local tools = {
+        { name = "Java", cmd = "java", args = { "-version" } },
+        { name = "javac", cmd = "javac", args = { "-version" } },
+        { name = "Maven", cmd = "mvn", args = { "-version" } },
+        { name = "Gradle", cmd = "gradle", args = { "--version" } },
+        { name = "Checkstyle", cmd = "java", args = { "-jar", vim.fn.expand("~/checkstyle.jar"), "-version" } },
+        { name = "Google Java Format", cmd = "java", args = { "-jar", vim.fn.expand("~/google-java-format.jar"), "--version" } },
+        { name = "PMD", cmd = vim.fn.expand("~/pmd-bin-7.15.0/bin/pmd"), args = { "--version" } },
+    }
+
+    for _, tool in ipairs(tools) do
+        local result = vim.fn.system(table.concat(vim.list_extend({ tool.cmd }, tool.args), " "))
+        if vim.v.shell_error == 0 then
+            print(tool.name .. " : ✓ OK")
+        else
+            print(tool.name .. " : ✗ NOK")
         end
     end
 end
